@@ -32,7 +32,7 @@ Using Python's sklearn package, I was able to find the coefficients of the logis
 2        Age  [-0.0227492356786] <br>
 3  Numfamily   [-0.283363260057] <br>
 4    Title_0  [-0.0837148184562] (Unknown)<br>
-5    Title_1   [-0.572020559236] (Regular Male);<br>
+5    Title_1   [-0.572020559236] (Regular Male)<br>
 6    Title_2  [0.00278960533722] (Military)<br>
 7    Title_3     [1.49157579596] (High Male)<br>
 8    Title_4    [0.848931989972](Regular Female)<br>
