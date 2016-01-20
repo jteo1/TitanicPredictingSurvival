@@ -3,7 +3,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 import numpy as np
 import matplotlib.pyplot as plt
-pd.options.mode.chained_assignment = None
+pd.options.mode.chained_assignment = None #prevent from warning about modifying copy of a DataFrame
 
 #Extracts name "Title", ie. Mr, Ms, Capt, Sir, etc
 def get_title(name):
@@ -46,11 +46,55 @@ def modify_dataframe(df):
 
     return df
 
-#TODO: add plot visualizations of features
 def visualize_dataframe(df):
-    # specifies the parameters of our graphs
-    fig = plt.figure(figsize=(18,6), dpi=100)
-    plt.show()
+    #setup a 2x3 grid of plots
+    fig, axes = plt.subplots(nrows = 2, ncols = 3, figsize=(20,10))
+
+    #Total survival numbers
+    ax1 = df.Survived.value_counts(ascending = True).plot(kind = "bar", alpha = 0.5, ax = axes[0,0], color = ['g', 'darkblue'])
+    ax1.set_xticklabels(["Survived","Died"], rotation=0)
+    ax1.set_title("Total Number of Survivors")
+
+    #Survival by male vs female
+    df_gender = pd.DataFrame(columns = ["Survived", "Died"])
+    df_gender["Survived"] = df.Sex[df.Survived == 1].value_counts(sort = False)
+    df_gender["Died"] = df.Sex[df.Survived == 0].value_counts(sort = False)
+    ax2 = df_gender.plot(kind = "bar", alpha = 0.5, ax = axes[0,1], color = ['g', 'darkblue'])
+    ax2.set_title("Survival by Sex")
+    ax2.set_xticklabels(["Male","Female"], rotation=0)
+
+    #Survival by passenger class
+    df_class = pd.DataFrame(columns = ["Survived", "Died"])
+    df_class["Survived"] = df.Pclass[df.Survived == 1].value_counts(sort = False)
+    df_class["Died"] = df.Pclass[df.Survived == 0].value_counts(sort = False)
+    ax3 = df_class.plot(kind = "bar", alpha = 0.5, rot = 1, ax = axes[0,2], color = ['g', 'darkblue'])
+    ax3.set_title("Survival by Class")
+
+    #Survival by Age (groups of 10 years)
+    filter_values = [0, 10, 20, 30, 40, 50, 60, 70]
+    df_age = pd.DataFrame(columns = ["Survived", "Died"])
+    df_age["Survived"] = df.Age[df.Survived == 1].value_counts(sort = False, bins = filter_values)
+    df_age["Died"] = df.Age[df.Survived == 0].value_counts(sort = False, bins = filter_values)
+    ax4 = df_age.plot(kind = "bar", alpha = 0.5, rot = 1, ax = axes[1,0], color = ['g', 'darkblue'])
+    ax4.set_title("Survival by Age")
+    ax4.set_xticklabels(["0-10", "10-20", "20-30", "30-40", "40-50", "50-60", "60-70"], rotation=0)
+
+    #survival by number of family members
+    df_family = pd.DataFrame(columns = ["Survived", "Died"])
+    df_family["Survived"] = df.Numfamily[df.Survived == 1].value_counts(sort = False)
+    df_family["Died"] = df.Numfamily[df.Survived == 0].value_counts(sort = False)
+    ax5 = df_family.plot(kind = "bar", alpha = 0.5, rot = 1, ax = axes[1,1], color = ['g', 'darkblue'])
+    ax5.set_title("Survival by Number of Family")
+
+    #Survival by title
+    df_title = pd.DataFrame(columns = ["Survived", "Died"])
+    df_title["Survived"] = df.Title[df.Survived == 1].value_counts(sort = False)
+    df_title["Died"] = df.Title[df.Survived == 0].value_counts(sort = False)
+    ax6 = df_title.plot(kind = "bar", alpha = 0.5, ax = axes[1,2], color = ['g', 'darkblue'])
+    plt.title("Survival by Name Title")
+    ax6.set_xticklabels(["Unknown", "RegMale", "Military", "HighMale", "RegFemale", "HighFemale"], rotation=45)
+
+    fig.savefig('survival_by_feature.jpg')
 
 #-------------------------------_END HELPER FUNCTIONS----------------------------
 #--------------------------------------------------------------------------------
@@ -58,7 +102,7 @@ def visualize_dataframe(df):
 #read training data into dataframe, ignore first row since its the header row
 train = pd.read_csv('train.csv', header = 0)
 train = modify_dataframe(train)
-#visualize_dataframe(train)
+visualize_dataframe(train)
 
 #the meaningful features that I decided on
 predictor_columns = ["Pclass", "Sex", "Age", "Numfamily", "Title_0", "Title_1", "Title_2", "Title_3", "Title_4"]
