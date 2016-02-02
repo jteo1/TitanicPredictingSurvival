@@ -15,7 +15,7 @@ Survival, PassengerClass, Name, Sex, #Sibling/Spouses, #Parents/Children, ticket
 <br><br>
 From intuition, I decided that the important features to be found are:
 <ul>
-  <li>Gender/Age. The Titanic tragedy was widely known for saving women and children first, and upon examination of the data it was indeed found that a high proportion of women survived compared to women.</li>
+  <li>Gender/Age. The Titanic tragedy was widely known for saving women and children first, and upon examination of the data it was indeed found that a high proportion of women survived compared to men.</li>
   <li>Passenger Class. Higher classes were given priority to the lifeboats, and I decided that the fare was redundant given this information. Since the fare is proportional to the Class anyway.</li>
   <li>Number of Family Aboard. The less family a passenger had aboard, the more likely I assume they were to survive; conversely, if a passsenger had many family members, they may spend crucial time saving other loved ones and staying together. To track this feature, I added the results of Sibling/Spouses and Parents/Children together to create a new feature column.</li>
   <li>Title of a person's name. Surprisingly, I was able to extract important information from the name of a passenger. This is because the "title" of a passenger is also included, ie. Mr, Mrs, Dr, Major, Capt, Don, Master, etc. I decided to group these titles into 6 main categories, being Military, Prestigious Female, Regular Female, Prestigious Male, Regular Male, and an Unknown title group. I used dummy variables to indicate which of the 6 groups a passenger was in (denoted by a 1 or a 0), while ommitting a one of them to avoid the dummy variable trap. </li>
