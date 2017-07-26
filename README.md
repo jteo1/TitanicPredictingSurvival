@@ -1,13 +1,13 @@
-#Kaggle Titanic Competition: Machine Learning from Disaster
+# Kaggle Titanic Competition: Machine Learning from Disaster
 
-#Overview
+# Overview
 In this program, we predict the survival of Titanic passengers based on a database of information provided by Kaggle, a  data science site that hosts machine learning competitions. As a popular starting competition for most beginners, it provides highly structured data with many introductory tutorials; however, beyond the tutorials users may create more advanced models based on complex data modeling techniques. I decided to employ the Logistic Regression technique as opposed to the recommended Random Forest, since my current understanding of predictive models is thus far limited to simpler regression models. In any case, it was found that the Logistic Regression performed almost as well as a Random Forest does, thereby proving that simpler models can be just as effective as the more complicated ones. <br> <br>
 The link to the competition may be found here: https://www.kaggle.com/c/titanic
 
-#Usage
+# Usage
 Usage of the program is simply a matter of calling python on the predict.py script. It uses Kaggle's train.csv to train the Logistic Regression model, and a test.csv that witholds the survival status of each passenger to test the model. The output is a .csv file that contains a passengerId and the predicted result of that passenger, which is used to tentatively score the model in a public leaderboard, and a .jpg file containing the survival by each feature I chose to be significant.
 
-#Notes about the program
+# Notes about the program
 This project served as an introduction into machine learning and Python's pandas and sklearn packages, and as such I decided to go with a simpler predictive model. However, as found throughout the forums, the Logistic Regression is capable of performing just as well (if not better) compared to the Random Forest. It was actually easy to swap in a Random Forest algorithm due to the simplicity of the sklearn package in Python; instead of calling predictor = LogisticRegression(), I could use predictor = RandomForestClassifier(n_estimators = 100) with no effect on the other code to employ the different model. Surprisingly, the Random Forest performed worse anyways, so I stuck to the simpler model since I had a better understanding of it. 
 <br><br>
 The first step was to determine which features were meaningful from the given data, and what new features we could engineer from all the data. The attributes given in the training data were: <br>
@@ -45,5 +45,5 @@ In the end, I decided to ignore the ticket#, and EmbarkLocation columns, since i
 
 
 
-#Results
+# Results
 The result on the test data for my model was 0.78947 on the public leaderboards. This result was actually quite decent; the top 5-10% scores were around 0.81, with score in the 0.9s presumed to be from cheaters that either found the true values or used larger datasets online to train their model. Also, given the presence of many highly experienced users on this website, I am thus satisfied with its performance. In any case, the current score is a result of the public leaderboard using their given test set; in the future, the private leaderboard score will contain a larger test set that provides a final official score when the competition concludes.
